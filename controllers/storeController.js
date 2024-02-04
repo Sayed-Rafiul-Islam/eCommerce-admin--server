@@ -31,6 +31,16 @@ const getFirstStores = async (req,res) => {
     }
 }
 
+const getStores = async (req,res) => {
+    try {
+        const { userId } = req.query
+        const stores = await Store.find({userId})
+        res.status(200).json(stores.reverse())
+    } catch (error) {
+        res.status(500).send(error)
+    }
+}
+
 // get stores 
 
 const getStoresById = async (req,res) => {
@@ -51,5 +61,6 @@ const getStoresById = async (req,res) => {
 module.exports = {
     createStore,
     getFirstStores,
-    getStoresById
+    getStoresById,
+    getStores
 }
