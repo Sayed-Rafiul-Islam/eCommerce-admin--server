@@ -22,6 +22,7 @@ const monthlyRouter = require('./routes/monthlyRouter')
 const sellRouter = require('./routes/sellRouter')
 const varificationRouter = require('./routes/varification')
 const storeRouter = require('./routes/storeRouter')
+const billboardRouter = require('./routes/billboardRouter')
 
 
 // Routes 
@@ -32,6 +33,7 @@ app.use('/api', monthlyRouter)
 app.use('/api', sellRouter) 
 app.use('/api', varificationRouter) 
 app.use('/api', storeRouter) 
+app.use('/api', billboardRouter) 
 
 const mongoose = require('mongoose');
 

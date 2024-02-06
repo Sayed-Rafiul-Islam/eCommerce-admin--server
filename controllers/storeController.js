@@ -25,7 +25,7 @@ const getFirstStores = async (req,res) => {
     try {
         const { userId } = req.query
         const stores = await Store.find({userId})
-        res.status(200).json(stores.reverse()[0])
+        res.status(200).json(stores.reverse())
     } catch (error) {
         res.status(500).send(error)
     }
@@ -56,11 +56,40 @@ const getStoresById = async (req,res) => {
     }
 }
 
+// get stores 
+
+const updateStore = async (req,res) => {
+    try {
+        const {storeId, userId, name} = req.body
+        const filter = {_id : storeId ,userId}
+        const update = {name}
+        const store = await Store.updateMany(filter,update,{new : true})
+        res.status(200).json(store)
+    } catch (error) {
+        res.status(500).send(error)
+    }
+}
+
+// get stores 
+
+const deleteStore = async (req,res) => {
+    try {
+        const {storeId,userId} = req.query
+        const filter = {_id : storeId ,userId}
+        const store = await Store.deleteOne(filter)
+        res.status(200).json(store)
+    } catch (error) {
+        res.status(500).send(error)
+    }
+}
+
 // export
 
 module.exports = {
     createStore,
     getFirstStores,
     getStoresById,
-    getStores
+    getStores,
+    updateStore,
+    deleteStore
 }
