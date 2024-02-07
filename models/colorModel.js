@@ -1,19 +1,17 @@
 const mongoose = require("mongoose")
-const Billboard = require('./billboardModal')
 
 const Schema = mongoose.Schema
 
-const CategoryModel = new Schema({
+const ColorModel = new Schema({
     storeId : {
         type : String,
         required : true
     },
-    billboardId : {
-        type: mongoose.Schema.Types.ObjectId,
-        ref : Billboard,
+    name : {
+        type : String,
         required : true
     },
-    name : {
+    value : {
         type : String,
         required : true
     },
@@ -27,6 +25,6 @@ const CategoryModel = new Schema({
     }
 })
 
-const Category = mongoose.model("Category", CategoryModel)
+const Color = mongoose.model("Color", ColorModel)
 
-module.exports = Category
+module.exports = Color

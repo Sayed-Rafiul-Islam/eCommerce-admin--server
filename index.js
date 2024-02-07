@@ -22,6 +22,9 @@ const storeRouter = require('./routes/storeRouter')
 const billboardRouter = require('./routes/billboardRouter')
 const categoryRouter = require('./routes/categoryRouter')
 const sizeRouter = require('./routes/sizeRouter')
+const colorRouter = require('./routes/colorRouter')
+const productRouter = require('./routes/productRouter')
+const orderRouter = require('./routes/orderRouter')
 
 
 // Routes 
@@ -32,6 +35,9 @@ app.use('/api', storeRouter)
 app.use('/api', billboardRouter) 
 app.use('/api', categoryRouter) 
 app.use('/api', sizeRouter) 
+app.use('/api', colorRouter) 
+app.use('/api', productRouter) 
+app.use('/api', orderRouter) 
 
 const mongoose = require('mongoose');
 

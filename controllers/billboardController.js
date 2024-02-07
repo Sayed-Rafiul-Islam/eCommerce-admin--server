@@ -20,8 +20,8 @@ const createBillboard = async (req,res) => {
 const getBillboards = async (req,res) => {
     try {
         const {storeId} = req.params
-        const billboards = await Billboard.find({storeId})
-        res.status(200).json(billboards.reverse())
+        const billboards = await Billboard.find({storeId}).sort({ updatedAt : -1})
+        res.status(200).json(billboards)
     } catch (error) {
         res.status(500).send(error)
     }

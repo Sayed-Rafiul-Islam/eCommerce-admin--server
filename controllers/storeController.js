@@ -24,8 +24,8 @@ const createStore = async (req,res) => {
 const getFirstStores = async (req,res) => {
     try {
         const { userId } = req.query
-        const stores = await Store.find({userId})
-        res.status(200).json(stores.reverse())
+        const stores = await Store.find({userId}).sort({ updatedAt : -1})
+        res.status(200).json(stores)
     } catch (error) {
         res.status(500).send(error)
     }
@@ -34,8 +34,8 @@ const getFirstStores = async (req,res) => {
 const getStores = async (req,res) => {
     try {
         const { userId } = req.query
-        const stores = await Store.find({userId})
-        res.status(200).json(stores.reverse())
+        const stores = await Store.find({userId}).sort({ updatedAt : -1})
+        res.status(200).json(stores)
     } catch (error) {
         res.status(500).send(error)
     }
@@ -62,7 +62,7 @@ const updateStore = async (req,res) => {
     try {
         const {storeId, userId, name} = req.body
         const filter = {_id : storeId ,userId}
-        const update = {name}
+        const update = {name, updatedAt : new Date}
         const store = await Store.updateMany(filter,update,{new : true})
         res.status(200).json(store)
     } catch (error) {

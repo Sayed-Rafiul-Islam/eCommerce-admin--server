@@ -20,8 +20,8 @@ const createCategory = async (req,res) => {
 const getCategories = async (req,res) => {
     try {
         const {storeId} = req.params
-        const categories = await Category.find({storeId})
-        res.status(200).json(categories.reverse())
+        const categories = await Category.find({storeId}).sort({ updatedAt : -1}).populate("billboardId")
+        res.status(200).json(categories)
     } catch (error) {
         res.status(500).send(error)
     }

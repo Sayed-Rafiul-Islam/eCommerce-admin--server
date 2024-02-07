@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongodb')
-const Size = require('../models/sizeModel')
+const Order = require('../models/orderModel')
 
 
 // get sizes
@@ -7,7 +7,7 @@ const Size = require('../models/sizeModel')
 const getSizes = async (req,res) => {
     try {
         const {storeId} = req.params
-        const sizes = await Size.find({storeId}).sort({ updatedAt : -1})
+        const sizes = await Order.find({storeId}).sort({ updatedAt : -1})
         res.status(200).json(sizes)
     } catch (error) {
         res.status(500).send(error)
