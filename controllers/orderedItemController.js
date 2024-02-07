@@ -1,14 +1,14 @@
 const { ObjectId } = require('mongodb')
-const Order = require('../models/orderModel')
+const OrderedItem = require('../models/orderedItemModel')
 
 
-// get order
+// get sizes
 
-const getOrders = async (req,res) => {
+const getSizes = async (req,res) => {
     try {
         const {storeId} = req.params
-        const orders = await Order.find({storeId}).sort({ updatedAt : -1})
-        res.status(200).json(orders)
+        const sizes = await Order.find({storeId}).sort({ updatedAt : -1})
+        res.status(200).json(sizes)
     } catch (error) {
         res.status(500).send(error)
     }
@@ -77,5 +77,9 @@ const deleteSize = async (req,res) => {
 // export
 
 module.exports = {
-    getOrders
+    getSizes,
+    getSizeById,
+    createSize,
+    updateSize,
+    deleteSize
 }

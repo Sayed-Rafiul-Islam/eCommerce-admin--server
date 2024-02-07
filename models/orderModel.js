@@ -1,19 +1,40 @@
 const mongoose = require("mongoose")
+const OrderedItem = require('./orderedItemModel')
 
 const Schema = mongoose.Schema
+
 
 const OrderModel = new Schema({
     storeId : {
         type : String,
         required : true
     },
-    name : {
-        type : String,
+    orderedItems : {
+        type : [
+            {
+                orderedItem : {
+                    type : mongoose.Schema.Types.ObjectId,
+                    ref : OrderedItem,
+                    required : true
+                }
+            }
+        ],
         required : true
     },
-    value : {
+    isPaid : {
+        type : Boolean,
+        required : true,
+        default : false
+    },
+    phone : {
         type : String,
-        required : true
+        required : true,
+        default : ''
+    },
+    address : {
+        type : String,
+        required : true,
+        default : ''
     },
     createdAt : {
         type : Date,
