@@ -1,45 +1,32 @@
 const { ObjectId } = require('mongodb')
 const Size = require('../models/sizeModel')
 
-// create Category
 
-const createCategory = async (req,res) => {
-    try {
-        const category = req.body
-        const newCategory = await Category.create(category)
-        res.status(200).json(newCategory)
-    } catch (error) {
-        console.log(error)
-        res.status(500).send(error)
-    }
-}
+// get sizes
 
-// get Categories
-
-
-const getCategories = async (req,res) => {
+const getSizes = async (req,res) => {
     try {
         const {storeId} = req.params
-        const categories = await Category.find({storeId})
-        res.status(200).json(categories.reverse())
+        const sizes = await Size.find({storeId})
+        res.status(200).json(sizes.reverse())
     } catch (error) {
         res.status(500).send(error)
     }
 }
 
-// get category by ID
+// get size by ID
 
-const getCategoryById = async (req,res) => {
+const getSizeById = async (req,res) => {
     try {
-        const {categoryId} = req.params
+        const {sizeId} = req.params
         
-        if (!ObjectId.isValid(categoryId)) {
+        if (!ObjectId.isValid(sizeId)) {
             res.status(200).json(null)
         } else {
-            const category = await Category.findOne({
-                _id : categoryId
+            const size = await Size.findOne({
+                _id : sizeId
             })
-            res.status(200).json(category)
+            res.status(200).json(size)
         }
         
     } catch (error) {
@@ -48,27 +35,40 @@ const getCategoryById = async (req,res) => {
     }
 }
 
-// update category 
+// create size
 
-const updateCategory = async (req,res) => {
+const createSize = async (req,res) => {
+    try {
+        const size = req.body
+        const newsize = await Size.create(size)
+        res.status(200).json(newsize)
+    } catch (error) {
+        console.log(error)
+        res.status(500).send(error)
+    }
+}
+
+// update size 
+
+const updateSize = async (req,res) => {
     try {
         const update = req.body
-        const filter = {_id : update.categoryId}
-        const updatedCategory = await Category.updateMany(filter,update,{new : true})
-        res.status(200).json(updatedCategory)
+        const filter = {_id : update.sizeId}
+        const updatedsize = await Size.updateMany(filter,update,{new : true})
+        res.status(200).json(updatedsize)
     } catch (error) {
         res.status(500).send(error)
     }
 }
 
-// delete category 
+// delete size 
 
-const deleteCategory = async (req,res) => {
+const deleteSize = async (req,res) => {
     try {
-        const {categoryId} = req.params
-        const filter = {_id : categoryId}
-        const deletedCategory = await Category.deleteOne(filter)
-        res.status(200).json(deletedCategory)
+        const {sizeId} = req.params
+        const filter = {_id : sizeId}
+        const deletedsize = await Size.deleteOne(filter)
+        res.status(200).json(deletedsize)
     } catch (error) {
         res.status(500).send(error)
     }
@@ -77,9 +77,9 @@ const deleteCategory = async (req,res) => {
 // export
 
 module.exports = {
-    getCategoryById,
-    createCategory,
-    updateCategory,
-    deleteCategory,
-    getCategories
+    getSizes,
+    getSizeById,
+    createSize,
+    updateSize,
+    deleteSize
 }

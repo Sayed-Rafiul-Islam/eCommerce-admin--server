@@ -2,18 +2,18 @@ const express = require('express');
 const router = express.Router()
 
 const { 
-    getCategories, 
-    getCategoryById, 
-    createCategory, 
-    updateCategory, 
-    deleteCategory 
-} = require('../controllers/categoryController');
+    getSizes, 
+    getSizeById, 
+    createSize, 
+    updateSize, 
+    deleteSize 
+} = require('../controllers/sizeController');
 
 
-router.get('/:storeId/categories', getCategories)
-router.get('/:storeId/categories/:categoryId', getCategoryById)
-router.post('/:storeId/categories', createCategory)
-router.patch('/:storeId/categories/:categoryId', updateCategory)
-router.delete('/:storeId/categories/:categoryId', deleteCategory)
+router.get('/:storeId/sizes', getSizes)
+router.get('/:storeId/sizes/:sizeId', getSizeById)
+router.post('/:storeId/sizes', createSize)
+router.patch('/:storeId/sizes/:sizeId', updateSize)
+router.delete('/:storeId/sizes/:sizeId', deleteSize)
 
 module.exports = router
