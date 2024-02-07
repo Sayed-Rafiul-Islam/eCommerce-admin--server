@@ -15,25 +15,23 @@ app.use(express.urlencoded({extended : true}))
 
 
 // Route Imports
-const productRouter = require('./routes/productRouter')
 const adminRouter = require('./routes/adminRouter')
-const inventoryRouter = require('./routes/inventoryRouter')
-const monthlyRouter = require('./routes/monthlyRouter')
-const sellRouter = require('./routes/sellRouter')
 const varificationRouter = require('./routes/varification')
+
 const storeRouter = require('./routes/storeRouter')
 const billboardRouter = require('./routes/billboardRouter')
+const categoryRouter = require('./routes/categoryRouter')
+const sizeRouter = require('./routes/sizeRouter')
 
 
 // Routes 
-app.use('/api', productRouter) 
-app.use('/api', adminRouter) 
-app.use('/api', inventoryRouter) 
-app.use('/api', monthlyRouter) 
-app.use('/api', sellRouter) 
+app.use('/api', adminRouter)  
 app.use('/api', varificationRouter) 
+
 app.use('/api', storeRouter) 
 app.use('/api', billboardRouter) 
+app.use('/api', categoryRouter) 
+app.use('/api', sizeRouter) 
 
 const mongoose = require('mongoose');
 

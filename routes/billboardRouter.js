@@ -1,8 +1,13 @@
-
 const express = require('express');
 const router = express.Router()
 
-const { getBillboardbyId, createBillboard, updateBillboard, deleteBillboard, getBillboards } = require('../controllers/billboardController');
+const { 
+    getBillboardbyId, 
+    createBillboard, 
+    updateBillboard, 
+    deleteBillboard, 
+    getBillboards 
+} = require('../controllers/billboardController');
 
 
 router.get('/:storeId/billboards/:billboardId', getBillboardbyId)

@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb')
 const Billboard = require('../models/billboardModal')
 
 // create billboard
@@ -31,7 +32,7 @@ const getBillboards = async (req,res) => {
 const getBillboardbyId = async (req,res) => {
     try {
         const {billboardId} = req.params
-        if (billboardId === 'new') {
+        if (!ObjectId.isValid(billboardId)) {
             res.status(200).json(null)
         } else {
             const billboard = await Billboard.findOne({

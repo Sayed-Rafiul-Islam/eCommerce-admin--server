@@ -1,7 +1,14 @@
 const express = require('express');
 const router = express.Router()
 
-const { createStore, getFirstStores, getStoresById, getStores, updateStore, deleteStore } = require('../controllers/storeController');
+const { 
+    createStore, 
+    getFirstStores, 
+    getStoresById, 
+    getStores, 
+    updateStore, 
+    deleteStore 
+} = require('../controllers/storeController');
 
 
 router.post('/createStore', createStore)
