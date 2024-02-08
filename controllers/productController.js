@@ -25,7 +25,7 @@ const getProductById = async (req,res) => {
         } else {
             const product = await Product.findOne({
                 _id : productId
-            })
+            }).populate(["categoryId","sizeId","colorId" ])
             res.status(200).json(product)
         }
         
