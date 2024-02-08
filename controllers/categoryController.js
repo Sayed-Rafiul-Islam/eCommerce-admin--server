@@ -38,7 +38,7 @@ const getCategoryById = async (req,res) => {
         } else {
             const category = await Category.findOne({
                 _id : categoryId
-            })
+            }).populate("billboardId")
             res.status(200).json(category)
         }
         
