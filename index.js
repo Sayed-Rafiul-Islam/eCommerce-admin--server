@@ -25,7 +25,6 @@ const sizeRouter = require('./routes/sizeRouter')
 const colorRouter = require('./routes/colorRouter')
 const productRouter = require('./routes/productRouter')
 const orderRouter = require('./routes/orderRouter')
-const orderedItemRouter = require('./routes/orderedItemRoute')
 const checkoutRouter = require('./routes/checkoutRouter')
 
 
@@ -40,7 +39,6 @@ app.use('/api', sizeRouter)
 app.use('/api', colorRouter) 
 app.use('/api', productRouter) 
 app.use('/api', orderRouter) 
-app.use('/api', orderedItemRouter) 
 app.use('/api', checkoutRouter) 
 
 const mongoose = require('mongoose');
