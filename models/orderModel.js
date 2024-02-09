@@ -29,12 +29,12 @@ const OrderModel = new Schema({
     phone : {
         type : String,
         required : true,
-        default : ''
+        default : 'none'
     },
     address : {
         type : String,
         required : true,
-        default : ''
+        default : 'none'
     },
     createdAt : {
         type : Date,

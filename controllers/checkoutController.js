@@ -1,4 +1,3 @@
-
 const { ObjectId } = require("mongodb")
 const stripe = require("../libs/stripe")
 const Order = require("../models/orderModel")
@@ -56,8 +55,8 @@ const checkout = async (req,res) => {
             orderedItems : products.map((product) =>  ({
                 orderedItem : product._id
             })),
-            phone : "sadas",
-            address : "sadsd",
+            phone : "###########",
+            address : "none",
             createdAt : new Date(),
             updatedAt : new Date()
         }
@@ -75,8 +74,9 @@ const checkout = async (req,res) => {
             },
             success_url : `${process.env.FRONTEND_STORE_URL}/cart?success=1`,
             cancel_url : `${process.env.FRONTEND_STORE_URL}/cart?canceled=1`,
-            metadata : {orderId : order._id}
+            metadata : { orderId : ObjectId(order._id).toString()}
         })
+
 
 
 
