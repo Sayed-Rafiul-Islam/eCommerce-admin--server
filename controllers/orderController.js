@@ -7,7 +7,8 @@ const Order = require('../models/orderModel')
 const getOrders = async (req,res) => {
     try {
         const {storeId} = req.params
-        const orders = await Order.find({storeId}).sort({ updatedAt : -1})
+        const orders = await Order.find({storeId}).sort({ updatedAt : -1}).populate("orderedItems.orderedItem")
+        console.log(orders[0].orderedItems)
         res.status(200).json(orders)
     } catch (error) {
         res.status(500).send(error)

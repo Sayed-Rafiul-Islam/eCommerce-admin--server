@@ -40,7 +40,6 @@ const getProductById = async (req,res) => {
 const createProduct = async (req,res) => {
     try {
         const product = req.body
-        console.log(product)
         const newProduct = await Product.create(product)
         res.status(200).json(newProduct)
     } catch (error) {
