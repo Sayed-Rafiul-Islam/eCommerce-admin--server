@@ -43,6 +43,10 @@ const ProductModel = new Schema({
         required : true,
         default : false
     },
+    quantuty : {
+        type : Number,
+        required : true,
+    },
     images : {
         type : [ { url : String } ],
         required : true
