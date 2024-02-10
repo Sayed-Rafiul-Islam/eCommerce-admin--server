@@ -34,7 +34,6 @@ const webhook = async (req,res) => {
 
         const addressString = addressComponents.filter((c) => c !== null).join(", ")
 
-
         if (event.type === "checkout.session.completed") {
 
             const filter = { _id : session?.metadata?.orderId }
@@ -63,7 +62,6 @@ const webhook = async (req,res) => {
             );
 
         }
-
         res.status(200).json(null)
 
 }
