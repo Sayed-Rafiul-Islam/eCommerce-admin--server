@@ -43,7 +43,7 @@ const ProductModel = new Schema({
         required : true,
         default : false
     },
-    quantuty : {
+    quantity : {
         type : Number,
         required : true,
     },
