@@ -18,7 +18,9 @@ const handleAuthorization = async (req,res) => {
 const checkout = async (req,res) => {
     try {
         const {storeId} = req.params
-        const productIds = req.body.productId
+        const {items} = req.body
+
+        const productIds = items.map((item) => item.id)
         
 
         if(!productIds || productIds.length === 0) {
@@ -28,6 +30,9 @@ const checkout = async (req,res) => {
         const products = await Product.find({
             '_id' : productIds
         })
+ 
+
+
 
 
 
@@ -37,7 +42,7 @@ const checkout = async (req,res) => {
 
         products.forEach((product) => {
             line_items.push({
-                quantity : 1,
+                quantity : items.filter((item) => item.id === ObjectId(product._id).toString()  ).map(({quantity})=>quantity)[0],
                 price_data : {
                     currency : "USD",
                     product_data : {
@@ -48,18 +53,22 @@ const checkout = async (req,res) => {
             })
         })
 
+        
+
 
 
         const data = {
             storeId,
             orderedItems : products.map((product) =>  ({
-                orderedItem : product._id
+                orderedItem : product._id,
+                quantity : items.filter((item) => item.id === ObjectId(product._id).toString()  ).map(({quantity})=>quantity)[0]
             })),
             phone : "###########",
             address : "none",
             createdAt : new Date(),
             updatedAt : new Date()
         }
+
 
 
 

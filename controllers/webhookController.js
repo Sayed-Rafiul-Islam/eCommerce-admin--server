@@ -34,6 +34,7 @@ const webhook = async (req,res) => {
 
         const addressString = addressComponents.filter((c) => c !== null).join(", ")
 
+
         if (event.type === "checkout.session.completed") {
 
             const filter = { _id : session?.metadata?.orderId }
@@ -46,19 +47,21 @@ const webhook = async (req,res) => {
             await Order.updateOne(filter,orderUpdate,{new : true})
             const order = await Order.findOne(filter)          
 
-            const productIds = order?.orderedItems?.map(({orderedItem,_id})=> ObjectId(orderedItem._id).toString())
-
-            const productsUpdate = { isArchieved : true }
-
-            await Product.updateMany(
-                {
-                    _id : {
-                        $in : productIds
-                    }
+            order.orderedItems.forEach(async (item) => {
+                const product = await Product.find({_id : ObjectId(item.orderedItem).toString() })
+                
+                product[0].quantity = product[0].quantity - item.quantity
+                await Product.updateOne({
+                    _id : ObjectId(item.orderedItem).toString()
                 },
-                productsUpdate,
+                {
+                    quantity : product[0].quantity
+                },
                 {new : true}
-            )
+                )  
+            },
+            );
+
         }
 
         res.status(200).json(null)
