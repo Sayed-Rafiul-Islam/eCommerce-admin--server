@@ -73,7 +73,6 @@ const checkout = async (req,res) => {
             createdAt : new Date(),
             updatedAt : new Date()
         }
-        console.log(data)
 
         const order = await Order.create(data)
 
