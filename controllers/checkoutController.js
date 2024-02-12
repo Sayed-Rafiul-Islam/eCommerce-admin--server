@@ -32,12 +32,6 @@ const checkout = async (req,res) => {
         })
  
 
-
-
-
-
-        
-
         const line_items  = []
 
         products.forEach((product) => {
@@ -51,26 +45,35 @@ const checkout = async (req,res) => {
                     unit_amount : parseFloat(product.price) * 100
                 }
             })
-        })
+        })    
 
-        
-
-
-
+        // const data = {
+        //     storeId,
+        //     orderedItems : products.map((product) =>  ({
+        //         orderedItem : product._id,
+        //         quantity : items.filter((item) => item.id === ObjectId(product._id).toString()).map(({quantity})=>quantity)[0]
+        //     })),
+        //     phone : "###########",
+        //     address : "none",
+        //     createdAt : new Date(),
+        //     updatedAt : new Date()
+        // }
         const data = {
             storeId,
             orderedItems : products.map((product) =>  ({
-                orderedItem : product._id,
-                quantity : items.filter((item) => item.id === ObjectId(product._id).toString()  ).map(({quantity})=>quantity)[0]
+                orderedItem : {
+                    productId : product._id,
+                    name : product.name,
+                    price : product.price,
+                },
+                quantity : items.filter((item) => item.id === ObjectId(product._id).toString()).map(({quantity})=>quantity)[0]
             })),
             phone : "###########",
             address : "none",
             createdAt : new Date(),
             updatedAt : new Date()
         }
-
-
-
+        console.log(data)
 
         const order = await Order.create(data)
 
@@ -85,8 +88,6 @@ const checkout = async (req,res) => {
             cancel_url : `${process.env.FRONTEND_STORE_URL}/cart?canceled=1`,
             metadata : { orderId : ObjectId(order._id).toString()}
         })
-
-
 
 
         res.status(200).json({ url : session.url, headers : corsHeaders })

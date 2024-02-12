@@ -13,9 +13,18 @@ const OrderModel = new Schema({
         type : [
             {
                 orderedItem : {
-                    type : mongoose.Schema.Types.ObjectId,
-                    ref : Product,
-                    required : true
+                    productId : {
+                        type : String,
+                        required : true
+                    },
+                    name : {
+                        type : String,
+                        required : true
+                    },
+                    price : {
+                        type : Number,
+                        required : true
+                    }
                 },
                 quantity : {
                     type : Number,
@@ -54,3 +63,18 @@ const OrderModel = new Schema({
 const Order = mongoose.model("Order", OrderModel)
 
 module.exports = Order
+
+// [
+//     {
+//         orderedItem : {
+//             type : mongoose.Schema.Types.ObjectId,
+//             ref : Product,
+//             required : true
+//         },
+//         quantity : {
+//             type : Number,
+//             required : true,
+//             default : 1
+//         }
+//     }
+// ]

@@ -47,17 +47,22 @@ const webhook = async (req,res) => {
             const order = await Order.findOne(filter)          
 
             order.orderedItems.forEach(async (item) => {
-                const product = await Product.find({_id : ObjectId(item.orderedItem).toString() })
+                const product = await Product.find({_id : item.orderedItem.productId })
+
                 
-                product[0].quantity = product[0].quantity - item.quantity
+                if ( product.length !== 0) {
+                    console.log(product[0].quantity)
+                    product[0].quantity = product[0].quantity - item.quantity
+                    console.log(product[0].quantity)
                 await Product.updateOne({
-                    _id : ObjectId(item.orderedItem).toString()
+                    _id : item.orderedItem.productId
                 },
                 {
                     quantity : product[0].quantity
                 },
                 {new : true}
                 )  
+                }
             },
             );
 
